@@ -1,58 +1,63 @@
 pipeline {
     agent any
 
+    tools {
+        // Имя должно совпадать с настройкой в Jenkins: Manage Jenkins → Global Tool Configuration
+        dotnet 'dotnet-8'
+    }
+
     environment {
-        PROJECT_NAME = 'lab2-vcs'
-        PYTHON_VERSION = '3.11'
+        PROJECT_DIR   = 'lab3/MyLab1Project'
+        TESTS_DIR     = 'lab3/MyLab1Project.Tests'
+        CONFIGURATION = 'Release'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                echo "Клонирование проекта ${env.PROJECT_NAME}..."
                 checkout scm
             }
         }
 
-        stage('Setup') {
+        stage('Restore') {
             steps {
-                echo 'Установка зависимостей...'
-                sh 'pip install -r requirements.txt || true'
+                bat "dotnet restore ${PROJECT_DIR}/MyLab1Project.csproj"
+                bat "dotnet restore ${TESTS_DIR}/MyLab1Project.Tests.csproj"
             }
         }
 
-        stage('Lint') {
+        stage('Build') {
             steps {
-                echo 'Статический анализ...'
-                sh 'pip install flake8 && flake8 . || true'
+                bat "dotnet build ${PROJECT_DIR}/MyLab1Project.csproj -c ${CONFIGURATION} --no-restore"
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Запуск тестов...'
-                sh 'pip install pytest && pytest || true'
+                bat "dotnet test ${TESTS_DIR}/MyLab1Project.Tests.csproj -c ${CONFIGURATION} --no-build --logger \"trx;LogFileName=test-results.trx\""
+            }
+            post {
+                always {
+                    junit '**/TestResults/*.trx'
+                }
             }
         }
 
-        stage('Archive') {
+        stage('Publish') {
             steps {
-                echo 'Сохранение артефакта...'
-                sh 'mkdir -p artifacts && echo "Build ${BUILD_NUMBER}" > artifacts/build.txt'
-                archiveArtifacts artifacts: 'artifacts/**', allowEmptyArchive: true
+                bat "dotnet publish ${PROJECT_DIR}/MyLab1Project.csproj -c ${CONFIGURATION} -o ${WORKSPACE}/publish"
+            }
+            post {
+                success {
+                    archiveArtifacts artifacts: 'publish/**/*', fingerprint: true
+                }
             }
         }
     }
 
     post {
         always {
-            echo "Pipeline завершён. Номер сборки: ${env.BUILD_NUMBER}"
-        }
-        success {
-            echo 'Все этапы прошли успешно!'
-        }
-        failure {
-            echo 'Один из этапов завершился с ошибкой'
+            cleanWs()
         }
     }
 }
