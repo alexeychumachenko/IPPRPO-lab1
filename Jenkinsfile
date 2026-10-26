@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         // Имя должно совпадать с настройкой в Jenkins: Manage Jenkins → Global Tool Configuration
-        dotnetsdk 'dotnet-8'
+        dotnet 'dotnet-8'
     }
 
     environment {
