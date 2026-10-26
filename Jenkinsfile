@@ -57,7 +57,7 @@ pipeline {
 
     post {
         always {
-            cleanWs()
+                step([$class: 'MSTestPublisher', testResultsFile: "**/TestResults/*.trx", failOnError: true, keepLongStdio: true])
         }
     }
 }
