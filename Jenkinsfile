@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     tools {
+        // Имя должно совпадать с настройкой в Jenkins: Manage Jenkins → Global Tool Configuration
         dotnetsdk 'dotnet-8'
     }
 
@@ -27,28 +28,24 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat "dotnet build "${PROJECT_DIR}/MyLab1Project.csproj\" -c ${CONFIGURATION} --no-restore"
-                bat "dotnet build "${TESTS_DIR}/MyLab1Project.Tests.csproj\" -c ${CONFIGURATION} --no-restore"
+                bat "dotnet build ${PROJECT_DIR}/MyLab1Project.csproj -c ${CONFIGURATION} --no-restore"
             }
         }
 
         stage('Test') {
             steps {
-                bat "dotnet test "${TESTS_DIR}/MyLab1Project.Tests.csproj\" -c ${CONFIGURATION} --no-build --logger \"trx;LogFileName=test-results.trx\""
+                bat "dotnet test ${TESTS_DIR}/MyLab1Project.Tests.csproj -c ${CONFIGURATION} --logger \"trx;LogFileName=test-results.trx\""
             }
             post {
                 always {
-                    step([$class: 'MSTestPublisher',
-                          testResultsFile: "**/TestResults/*.trx",
-                          failOnError: true,
-                          keepLongStdio: true])
+                    junit '**/TestResults/*.trx'
                 }
             }
         }
 
         stage('Publish') {
             steps {
-                bat "dotnet publish "${PROJECT_DIR}/MyLab1Project.csproj\" -c ${CONFIGURATION} -o \"${WORKSPACE}/publish\""
+                bat "dotnet publish ${PROJECT_DIR}/MyLab1Project.csproj -c ${CONFIGURATION} -o ${WORKSPACE}/publish"
             }
             post {
                 success {
@@ -60,7 +57,7 @@ pipeline {
 
     post {
         always {
-            // Очистка не требуется; отчёты уже опубликованы в стадии Test
+                step([$class: 'MSTestPublisher', testResultsFile: "**/TestResults/*.trx", failOnError: true, keepLongStdio: true])
         }
     }
 }
