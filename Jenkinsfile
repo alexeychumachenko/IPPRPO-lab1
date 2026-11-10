@@ -50,11 +50,13 @@ pipeline {
             steps {
                 bat "dotnet test ${TESTS_DIR}/MyLab1Project.Tests.csproj -c ${CONFIGURATION} --logger \"trx;LogFileName=test-results.trx\""
             }
+            /*
             post {
                 always {
                     junit 'test-results.trx'
                 }
             }
+            */
         }
 
         stage('Publish') {
