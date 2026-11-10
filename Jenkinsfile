@@ -31,7 +31,7 @@ pipeline {
                 bat "dotnet build ${PROJECT_DIR}/MyLab1Project.csproj -c ${CONFIGURATION} --no-restore"
             }
         }
-        
+        /*
         stage('Test') {
             steps {
                 bat "dotnet test ${TESTS_DIR}/MyLab1Project.Tests.csproj -c ${CONFIGURATION} --logger \"trx;LogFileName=test-results.trx\""
@@ -42,6 +42,17 @@ pipeline {
                 always {
                     // Публикуем уже сконвертированный XML-файл
                     junit "${TESTS_DIR}/TestResults/test-results.xml"
+                }
+            }
+        }
+*/
+        stage('Test') {
+            steps {
+                bat "dotnet test ${TESTS_DIR}/MyLab1Project.Tests.csproj -c ${CONFIGURATION} --logger \"trx;LogFileName=test-results.trx\""
+            }
+            post {
+                always {
+                    junit '**/TestResults/*.trx'
                 }
             }
         }
