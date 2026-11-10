@@ -34,7 +34,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                bat "dotnet test ${TESTS_DIR}/MyLab1Project.Tests.csproj -c ${CONFIGURATION} --no-build --logger \"trx;LogFileName=test-results.trx\""
+                bat "dotnet test ${TESTS_DIR}/MyLab1Project.Tests.csproj -c ${CONFIGURATION} --logger \"trx;LogFileName=test-results.trx\""
             }
             post {
                 always {
