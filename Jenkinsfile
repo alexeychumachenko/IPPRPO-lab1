@@ -52,7 +52,7 @@ pipeline {
             }
             post {
                 always {
-                    junit '${TESTS_DIR}/TestResults/*.trx'
+                    junit 'test-results.trx'
                 }
             }
         }
