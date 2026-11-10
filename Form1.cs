@@ -10,7 +10,7 @@ namespace lab1_9_
 
         public Form1()
         {
-            InitializeComponent();
+            InitializeComponent();  
 
             var cbr = new CbrProvider();
             var google = new GoogleFinanceProvider();
