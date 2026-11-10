@@ -1,0 +1,14 @@
+C:\ProgramData\Jenkins\.jenkins\workspace\Lab3-Git-Pipeline\publish\MyLab1Project.exe
+C:\ProgramData\Jenkins\.jenkins\workspace\Lab3-Git-Pipeline\publish\MyLab1Project.dll
+C:\ProgramData\Jenkins\.jenkins\workspace\Lab3-Git-Pipeline\publish\MyLab1Project.deps.json
+C:\ProgramData\Jenkins\.jenkins\workspace\Lab3-Git-Pipeline\publish\MyLab1Project.runtimeconfig.json
+C:\ProgramData\Jenkins\.jenkins\workspace\Lab3-Git-Pipeline\publish\MyLab1Project.pdb
+C:\ProgramData\Jenkins\.jenkins\workspace\Lab3-Git-Pipeline\publish\FluentValidation.dll
+C:\ProgramData\Jenkins\.jenkins\workspace\Lab3-Git-Pipeline\publish\Newtonsoft.Json.dll
+C:\ProgramData\Jenkins\.jenkins\workspace\Lab3-Git-Pipeline\publish\Serilog.dll
+C:\ProgramData\Jenkins\.jenkins\workspace\Lab3-Git-Pipeline\publish\Serilog.Sinks.Console.dll
+C:\ProgramData\Jenkins\.jenkins\workspace\Lab3-Git-Pipeline\publish\Serilog.Sinks.File.dll
+C:\ProgramData\Jenkins\.jenkins\workspace\Lab3-Git-Pipeline\publish\System.IO.Pipelines.dll
+C:\ProgramData\Jenkins\.jenkins\workspace\Lab3-Git-Pipeline\publish\System.Text.Encodings.Web.dll
+C:\ProgramData\Jenkins\.jenkins\workspace\Lab3-Git-Pipeline\publish\System.Text.Json.dll
+C:\ProgramData\Jenkins\.jenkins\workspace\Lab3-Git-Pipeline\publish\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
