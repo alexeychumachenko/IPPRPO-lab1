@@ -7,7 +7,7 @@ pipeline {
     }
 
     environment {
-        PROJECT_DIR   = 'D:/LAB/lab3/MyLab1Project'
+        PROJECT_DIR   = 'MyLab1Project'
         TESTS_DIR     = 'D:/LAB/lab3/MyLab1Project.Tests'
         CONFIGURATION = 'Release'
     }
@@ -61,7 +61,7 @@ pipeline {
 
         stage('Publish') {
             steps {
-                bat "dotnet publish /MyLab1Project/MyLab1Project.csproj -c ${CONFIGURATION} -o ${WORKSPACE}/publish"
+                bat "dotnet publish MyLab1Project/MyLab1Project.csproj -c ${CONFIGURATION} -o ${WORKSPACE}/publish"
             }
             post {
                 success {
