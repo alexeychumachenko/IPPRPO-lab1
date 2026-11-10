@@ -59,6 +59,19 @@ pipeline {
             */
         }
 
+        
+        stage('Publish') {
+            steps {
+                echo 'Сохранение артефакта...'
+                // Создаём папку artifacts и файл build.txt (Windows-синтаксис)
+                bat "if not exist artifacts mkdir artifacts"
+                bat "echo Build %BUILD_NUMBER% > artifacts\\build.txt"
+                
+                // Архивируем папку artifacts
+                archiveArtifacts artifacts: 'artifacts/**', allowEmptyArchive: true
+            }
+        }
+/*
         stage('Publish') {
             steps {
                 bat "dotnet publish MyLab1Project/MyLab1Project.csproj -c ${CONFIGURATION} -o ${WORKSPACE}/publish"
@@ -69,6 +82,7 @@ pipeline {
                 }
             }
         }
+*/
     }
 
     post {
