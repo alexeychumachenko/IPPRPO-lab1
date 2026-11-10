@@ -73,18 +73,6 @@ pipeline {
                 }
             }
         }
-/*
-        stage('Publish') {
-            steps {
-                bat "dotnet publish MyLab1Project/MyLab1Project.csproj -c ${CONFIGURATION} -o ${WORKSPACE}/publish"
-            }
-            post {
-                success {
-                    archiveArtifacts artifacts: 'publish/**/*', fingerprint: true
-                }
-            }
-        }
-*/
     }
 
     post {
