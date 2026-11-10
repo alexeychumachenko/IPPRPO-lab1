@@ -20,8 +20,8 @@ pipeline {
 
         stage('Restore') {
             steps {
-                bat "dotnet restore "${PROJECT_DIR}/MyLab1Project.csproj\""
-                bat "dotnet restore "${TESTS_DIR}/MyLab1Project.Tests.csproj\""
+                bat "dotnet restore ${PROJECT_DIR}/MyLab1Project.csproj"
+                bat "dotnet restore ${TESTS_DIR}/MyLab1Project.Tests.csproj"
             }
         }
 
