@@ -20,21 +20,21 @@ pipeline {
 
         stage('Restore') {
             steps {
-                bat "dotnet restore \"${PROJECT_DIR}/MyLab1Project.csproj\""
-                bat "dotnet restore \"${TESTS_DIR}/MyLab1Project.Tests.csproj\""
+                bat "dotnet restore "${PROJECT_DIR}/MyLab1Project.csproj\""
+                bat "dotnet restore "${TESTS_DIR}/MyLab1Project.Tests.csproj\""
             }
         }
 
         stage('Build') {
             steps {
-                bat "dotnet build \"${PROJECT_DIR}/MyLab1Project.csproj\" -c ${CONFIGURATION} --no-restore"
-                bat "dotnet build \"${TESTS_DIR}/MyLab1Project.Tests.csproj\" -c ${CONFIGURATION} --no-restore"
+                bat "dotnet build "${PROJECT_DIR}/MyLab1Project.csproj\" -c ${CONFIGURATION} --no-restore"
+                bat "dotnet build "${TESTS_DIR}/MyLab1Project.Tests.csproj\" -c ${CONFIGURATION} --no-restore"
             }
         }
 
         stage('Test') {
             steps {
-                bat "dotnet test \"${TESTS_DIR}/MyLab1Project.Tests.csproj\" -c ${CONFIGURATION} --no-build --logger \"trx;LogFileName=test-results.trx\""
+                bat "dotnet test "${TESTS_DIR}/MyLab1Project.Tests.csproj\" -c ${CONFIGURATION} --no-build --logger \"trx;LogFileName=test-results.trx\""
             }
             post {
                 always {
@@ -48,7 +48,7 @@ pipeline {
 
         stage('Publish') {
             steps {
-                bat "dotnet publish \"${PROJECT_DIR}/MyLab1Project.csproj\" -c ${CONFIGURATION} -o \"${WORKSPACE}/publish\""
+                bat "dotnet publish "${PROJECT_DIR}/MyLab1Project.csproj\" -c ${CONFIGURATION} -o \"${WORKSPACE}/publish\""
             }
             post {
                 success {
