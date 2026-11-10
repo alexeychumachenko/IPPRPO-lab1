@@ -58,7 +58,6 @@ pipeline {
             }
             */
         }
-
         
         stage('Publish') {
             steps {
@@ -66,9 +65,11 @@ pipeline {
                 // Создаём папку artifacts и файл build.txt (Windows-синтаксис)
                 bat "if not exist artifacts mkdir artifacts"
                 bat "echo Build %BUILD_NUMBER% > artifacts\\build.txt"
-                
-                // Архивируем папку artifacts
-                archiveArtifacts artifacts: 'artifacts/**', allowEmptyArchive: true
+            }
+            post {
+                success {
+                    archiveArtifacts artifacts: 'artifacts/**', allowEmptyArchive: true
+                }
             }
         }
 /*
