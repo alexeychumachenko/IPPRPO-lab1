@@ -6,7 +6,7 @@ namespace lab1_9_
 {
     public partial class Form1 : Form
     {
-        private CurrencyConverter _converter;
+        private CurrencyConverter _converter;  
 
         public Form1()
         {
