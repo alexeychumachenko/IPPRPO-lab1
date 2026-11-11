@@ -79,7 +79,7 @@ pipeline {
             steps {
                 echo 'Статический анализ C#...'
                 bat 'dotnet restore'
-                bat "dotnet build -v normal > artifacts\\analysis.txt"
+                bat 'dotnet build ip-lab1.csproj -v normal --no-restore'
                 bat "dotnet build /p:ErrorLog=lint.sarif --no-restore || exit 0"
                 archiveArtifacts artifacts: 'lint.sarif', allowEmptyArchive: true
             }
