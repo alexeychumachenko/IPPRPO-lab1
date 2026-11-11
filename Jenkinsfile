@@ -7,7 +7,7 @@ pipeline {
     }
 
     environment {
-        PROJECT_DIR   = 'MyLab1Project'
+        PROJECT_DIR   = 'D:/LAB/lab3/MyLab1Project'
         TESTS_DIR     = 'D:/LAB/lab3/MyLab1Project.Tests'
         CONFIGURATION = 'Release'
     }
