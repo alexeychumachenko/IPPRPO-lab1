@@ -35,14 +35,15 @@ pipeline {
         stage('Test') {
             steps {
                 bat "dotnet test ${TESTS_DIR}/MyLab1Project.Tests.csproj -c ${CONFIGURATION} --logger \"trx;LogFileName=test-results.trx\""
+                // Конвертируем .trx в .xml (JUnit формат)
+                bat "trx2junit \"${TESTS_DIR}\\TestResults\\test-results.trx\""
             }
-            /*
             post {
                 always {
-                    junit 'test-results.trx'
+                    // Публикуем уже сконвертированный XML-файл
+                    junit "${TESTS_DIR}/TestResults/test-results.xml"
                 }
             }
-            */
         }
         
         stage('Publish') {
